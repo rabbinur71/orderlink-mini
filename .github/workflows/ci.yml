@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install root deps
+        run: npm ci
+      - name: Set up server
+        run: |
+          cd server
+          npm ci
+      - name: Lint server
+        run: |
+          cd server
+          npx eslint "src/**/*.{ts,tsx,js}"
+      - name: Build server
+        run: |
+          cd server
+
+          npm run build
+      - name: Set up client
+        run: |
+          cd client
+          npm ci
+      - name: Lint client
+        run: |
+          cd client
+          npx eslint "src/**/*.{ts,tsx,js,jsx}"
+      - name: Build client
+        run: |
+          cd client
+          npm run build

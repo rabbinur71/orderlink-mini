@@ -1,0 +1,29 @@
+{
+    "name":  "orderlink-mini",
+    "version":  "1.0.0",
+    "main":  "index.js",
+    "keywords":  [
+
+                 ],
+    "author":  "",
+    "license":  "ISC",
+    "description":  "",
+    "devDependencies":  {
+                            "husky":  "^9.1.7",
+                            "lint-staged":  "^16.2.6"
+                        },
+    "scripts":  {
+                    "prepare":  "husky install",
+                    "test":  "echo \"Error: no test specified\" \u0026\u0026 exit 1"
+                },
+    "lint-staged":  {
+                        "server/**/*.{ts,tsx,js,jsx}":  [
+                                                            "npx eslint --fix",
+                                                            "git add"
+                                                        ],
+                        "client/**/*.{ts,tsx,js,jsx}":  [
+                                                            "npx eslint --fix",
+                                                            "git add"
+                                                        ]
+                    }
+}
